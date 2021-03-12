@@ -18,6 +18,7 @@ const PostContainer = styled.div`
     padding: 10px;
     max-width: 375px;
     margin: 0 auto;
+    margin-bottom: 5px;
 `
 
 const RankTitleDiv = styled.div`

@@ -20,7 +20,7 @@ export default function CommentButton() {
 
     return (
         <ButtonsDiv>
-            💬  234
+            💬 234
         </ButtonsDiv>
     )
 }

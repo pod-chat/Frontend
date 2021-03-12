@@ -15,6 +15,9 @@ export default function FeedContainer() {
     return (
         <Container>
              <FeedPost />
+             <FeedPost />
+             <FeedPost />
+             <FeedPost />
         </Container>
     )
 }
