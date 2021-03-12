@@ -1,19 +1,29 @@
 import React from 'react'
 import styled from 'styled-components'
 
-//component import
+//PostFeed Components Import
 import PostRank from './PostRank'
 import PostTitle from './PostTitle'
+import PostBody from './PostBody'
+import PostAuthor from './PostAuthor'
+
+//Top Level Components Import
+import PodcastTile from '../../components/PodcastTile'
+import EngagementOptions from '../../components/EngagementOptions'
+
 
 //Styling - Styled Components
 const PostContainer = styled.div`
     background-color: white;
     padding: 10px;
+    max-width: 375px;
+    margin: 0 auto;
 `
 
 const RankTitleDiv = styled.div`
     display: flex;
     justify-content: flex-start;
+    margin-bottom: 10px;
 `
 
 export default function View() {
@@ -23,24 +33,10 @@ export default function View() {
                 <PostRank />
                 <PostTitle />
             </RankTitleDiv>
-            {/* //TODO: Insert PostBody component */}
-            <div>
-                Have you ever tasted Elk heart? so good for you, one of the leanest meats. I've got some i'll give you it on the way out. How dare you? Jamie pull up that gif of Tortoises! mic closer and all Read More
-            </div>
-            {/* //TODO: Insert PostAuthor component */}
-            <div>
-                <img style={{height: '16px', width: '16px'}} src='https://www.washingtonpost.com/wp-stat/elections/2020/headshots/sanders-illo.png'/>
-                <div>Bernie Sanders</div>
-                <div>@BernieSanders</div>
-            </div>
-            {/* //TODO: Insert PodcastTile component */}
-            <div>
-                PODCAST TILE
-            </div>
-            {/* //TODO: Insert EngagementOptions component */}
-            <div>
-                ENGAGEMENT BUTTONS
-            </div>
+            <PostBody />
+            <PostAuthor />
+            <PodcastTile />
+            <EngagementOptions/>
         </PostContainer>
     )
 }

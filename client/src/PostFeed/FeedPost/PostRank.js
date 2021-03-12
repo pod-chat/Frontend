@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+//Styling - Styled Components
 const RankDiv = styled.div`
     height: 40px;
     font-size: 13px;

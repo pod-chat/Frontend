@@ -8,7 +8,6 @@ import FeedPost from './FeedPost'
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    background-color: #F8F8F8;
 `
 
 export default function FeedContainer() {
