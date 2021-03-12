@@ -1,10 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
+
+//component import
+import FeedSelect from './FeedSelect'
+import FeedContainer from './FeedContainer'
 
 export default function View() {
     return(
         <div>
-            PostFeed
+            <FeedSelect />
+            <FeedContainer />
         </div>
     )
 }
