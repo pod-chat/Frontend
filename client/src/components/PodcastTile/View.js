@@ -89,23 +89,11 @@ export default function View() {
     },[])
     
     // HELPLER FUNCTIONS //
-    //Time: seconds -> mm:ss
-    //TODO: make it to hh:mm:ss
+    //Time: seconds -> H:mm:ss
     const formatTime = (seconds) => {
         return (
-            [
-                Math.floor(seconds / 60), // minutes
-                Math.floor(seconds % 60), // remaining seconds
-            ]
-                .map(x => x.toString())
-        
-                // we want double digits, prepend a "0"
-                // if necessary
-                .map(x => (x.length === 1 ? `0${x}` : x))
-        
-                // join the result with a colon
-                .join(":")
-        );
+            new Date(seconds * 1000).toISOString().substr(12,7) //converts seconds to H:mm:ss
+        )
     }
 
     return(
