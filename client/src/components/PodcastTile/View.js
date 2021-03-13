@@ -77,7 +77,8 @@ export default function View() {
     const audioRef = React.useRef(null);
 
     const [pod, setPod] = useState({})
-    const [currentTime, setCurrentTime] = useState('')
+    const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(0);
 
     useEffect(()=> {
         getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
@@ -127,6 +128,8 @@ export default function View() {
                 <audio 
                     id='player' 
                     ref={audioRef} 
+                    onLoadedData={() => {
+                        setDuration(audioRef.current.duration)}}
                     onTimeUpdate={() => {
                         // on update, retrieve currentTime from ref,
                         // store it in state
@@ -136,7 +139,7 @@ export default function View() {
                 /> 
                 <TimeDisplay>
                     <TimeStamp>{formatTime(currentTime)}</TimeStamp>
-                    <TimeStamp>55:00</TimeStamp>
+                    <TimeStamp>{formatTime(duration)}</TimeStamp>
                 </TimeDisplay>
                 <ProgressBar id='seekbar' value="0" max='1' />
                 <div> 
