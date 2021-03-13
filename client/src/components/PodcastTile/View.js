@@ -86,11 +86,11 @@ export default function View() {
                 </PodTitleEpisodeDiv>
             </PodInfoDiv>
             <div>
-                <audio id='player' onTimeUpdate={()=> audioProgress()} src={pod.audio}/>
+                <audio id='player' onTimeUpdate={()=> audioProgress()} src={`${pod.audio}#t=1000,3000`}/>
                 <ProgressBar id='seekbar' value="0" max='1' />
                 <div> 
-                    <button onClick={()=> document.getElementById('player').play()}>Play</button> 
-                    <button onClick={()=> document.getElementById('player').pause()}>Pause</button> 
+                    <button onClick={()=> document.getElementById('player').play()}>▶️</button> 
+                    <button onClick={()=> document.getElementById('player').pause()}>⏸</button> 
                 </div>
             </div>
         </Container>
