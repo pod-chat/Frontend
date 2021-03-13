@@ -64,7 +64,7 @@ const audioProgress = () => {
 export default function View() {
     const [pod, setPod] = useState({})
     useEffect(()=> {
-        getPodcastEpisode('634ceb8f39f648e792ae2add00e084a1') //TODO: hardcoded episode ID Needs changed
+        getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
             .then(data => {
                 setPod(data)
             })
@@ -78,8 +78,11 @@ export default function View() {
                     <PodImage src={pod.image} alt={`Podcast: ${pod.title}`}/>
                 </div>
                 <PodTitleEpisodeDiv>
-                    {/* <EpisodeTitle>{ pod.title }</EpisodeTitle>
-                    <PodcastTitle>{ pod.podcast.title }</PodcastTitle> */}
+                    {
+                        pod.title ? 
+                        <><EpisodeTitle>{ pod.title }</EpisodeTitle>
+                        <PodcastTitle>{ pod.podcast.title }</PodcastTitle></> : <div>loading...</div>
+                    }
                 </PodTitleEpisodeDiv>
             </PodInfoDiv>
             <div>
