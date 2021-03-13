@@ -49,6 +49,18 @@ const PodcastTitle = styled.div`
     font-size: 13px;
     color: darkgray;
 `
+const ProgressBar = styled.progress`
+    width: 100%;
+    margin: 0 auto;
+`
+
+//HELPER FUNCTION
+const audioProgress = () => {
+    const currentTime = document.querySelector('#player').currentTime
+    const duration = document.querySelector('#player').duration
+    document.querySelector('#seekbar').setAttribute("value", currentTime / duration)
+}
+
 export default function View() {
     const [pod, setPod] = useState({})
     useEffect(()=> {
@@ -66,12 +78,13 @@ export default function View() {
                     <PodImage src={pod.image} alt={`Podcast: ${pod.title}`}/>
                 </div>
                 <PodTitleEpisodeDiv>
-                    <EpisodeTitle>{ pod.title }</EpisodeTitle>
-                    <PodcastTitle>{ pod.podcast.title }</PodcastTitle>
+                    {/* <EpisodeTitle>{ pod.title }</EpisodeTitle>
+                    <PodcastTitle>{ pod.podcast.title }</PodcastTitle> */}
                 </PodTitleEpisodeDiv>
             </PodInfoDiv>
             <div>
-                <audio id='player' src={pod.audio}/>
+                <audio id='player' onTimeUpdate={()=> audioProgress()} src={pod.audio}/>
+                <ProgressBar id='seekbar' value="0" max='1' />
                 <div> 
                     <button onClick={()=> document.getElementById('player').play()}>Play</button> 
                     <button onClick={()=> document.getElementById('player').pause()}>Pause</button> 
