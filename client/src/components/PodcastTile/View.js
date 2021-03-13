@@ -65,21 +65,19 @@ const TimeStamp = styled.div`
     margin-bottom: -5px;
 `
 
-//HELPER FUNCTION
-// const audioProgress = () => {
-//     const currentTime = document.querySelector('#player').currentTime
-//     const duration = document.querySelector('#player').duration
-//     document.querySelector('#seekbar').setAttribute("value", currentTime / duration)
-// } 
+
+
 // ? may not be needed now. Refernecing this blog: https://www.erikverweij.dev/blog/building-a-minimal-audioplayer/
 
+
+// COMPONENET //
 export default function View() {
     const audioRef = React.useRef(null);
 
     const [pod, setPod] = useState({})
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
-    const [progress, setProgress] = useState(0);
+    const [progress, setProgress] = useState(0); //TODO figure out how to make progress bar show correctly on load, not on play
 
     useEffect(()=> {
         getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
@@ -90,10 +88,9 @@ export default function View() {
         setProgress(audioRef.current.currentTime / duration)
     },[])
     
-    //! HELPLER FUNCTIONS 1//
+    // HELPLER FUNCTIONS //
     //Time: seconds -> mm:ss
     //TODO: make it to hh:mm:ss
-    // 90 => "01:30"
     const formatTime = (seconds) => {
         return (
             [
