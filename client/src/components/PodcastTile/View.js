@@ -79,6 +79,7 @@ export default function View() {
     const [pod, setPod] = useState({})
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
+    const [progress, setProgress] = useState(0);
 
     useEffect(()=> {
         getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
@@ -86,9 +87,10 @@ export default function View() {
                 setPod(data)
             })
             .catch(err => console.log(err))
+        setProgress(audioRef.current.currentTime / duration)
     },[])
     
-  
+    //! HELPLER FUNCTIONS 1//
     //Time: seconds -> mm:ss
     //TODO: make it to hh:mm:ss
     // 90 => "01:30"
@@ -129,11 +131,15 @@ export default function View() {
                     id='player' 
                     ref={audioRef} 
                     onLoadedData={() => {
-                        setDuration(audioRef.current.duration)}}
+                        setDuration(audioRef.current.duration);
+                        setProgress(audioRef.current.currentTime / duration);
+                    }}
+                        
                     onTimeUpdate={() => {
                         // on update, retrieve currentTime from ref,
                         // store it in state
                         setCurrentTime(audioRef.current.currentTime);
+                        setProgress(audioRef.current.currentTime / duration);
                     }}            
                     src={`${pod.audio}#t=1000,3000`}
                 /> 
@@ -141,7 +147,7 @@ export default function View() {
                     <TimeStamp>{formatTime(currentTime)}</TimeStamp>
                     <TimeStamp>{formatTime(duration)}</TimeStamp>
                 </TimeDisplay>
-                <ProgressBar id='seekbar' value="0" max='1' />
+                <ProgressBar id='seekbar' value={progress} max='1' />
                 <div> 
                     <button onClick={()=> document.getElementById('player').play()}>▶️</button> 
                     <button onClick={()=> document.getElementById('player').pause()}>⏸</button> 
