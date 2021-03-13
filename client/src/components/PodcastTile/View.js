@@ -52,17 +52,33 @@ const PodcastTitle = styled.div`
 const ProgressBar = styled.progress`
     width: 100%;
     margin: 0 auto;
+    height: 25px;
+`
+const TimeDisplay = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+const TimeStamp = styled.div`
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 16px;
+    margin-bottom: -5px;
 `
 
 //HELPER FUNCTION
-const audioProgress = () => {
-    const currentTime = document.querySelector('#player').currentTime
-    const duration = document.querySelector('#player').duration
-    document.querySelector('#seekbar').setAttribute("value", currentTime / duration)
-}
+// const audioProgress = () => {
+//     const currentTime = document.querySelector('#player').currentTime
+//     const duration = document.querySelector('#player').duration
+//     document.querySelector('#seekbar').setAttribute("value", currentTime / duration)
+// } 
+// ? may not be needed now. Refernecing this blog: https://www.erikverweij.dev/blog/building-a-minimal-audioplayer/
 
 export default function View() {
+    const audioRef = React.useRef(null);
+
     const [pod, setPod] = useState({})
+    const [currentTime, setCurrentTime] = useState('')
+
     useEffect(()=> {
         getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
             .then(data => {
@@ -71,6 +87,27 @@ export default function View() {
             .catch(err => console.log(err))
     },[])
     
+  
+    //Time: seconds -> mm:ss
+    //TODO: make it to hh:mm:ss
+    // 90 => "01:30"
+    const formatTime = (seconds) => {
+        return (
+            [
+                Math.floor(seconds / 60), // minutes
+                Math.floor(seconds % 60), // remaining seconds
+            ]
+                .map(x => x.toString())
+        
+                // we want double digits, prepend a "0"
+                // if necessary
+                .map(x => (x.length === 1 ? `0${x}` : x))
+        
+                // join the result with a colon
+                .join(":")
+        );
+    }
+
     return(
         <Container>
             <PodInfoDiv>
@@ -86,7 +123,21 @@ export default function View() {
                 </PodTitleEpisodeDiv>
             </PodInfoDiv>
             <div>
-                <audio id='player' onTimeUpdate={()=> audioProgress()} src={`${pod.audio}#t=1000,3000`}/>
+                {/* //TODO: figure out how to change the audio playback range from user input */}
+                <audio 
+                    id='player' 
+                    ref={audioRef} 
+                    onTimeUpdate={() => {
+                        // on update, retrieve currentTime from ref,
+                        // store it in state
+                        setCurrentTime(audioRef.current.currentTime);
+                    }}            
+                    src={`${pod.audio}#t=1000,3000`}
+                /> 
+                <TimeDisplay>
+                    <TimeStamp>{formatTime(currentTime)}</TimeStamp>
+                    <TimeStamp>55:00</TimeStamp>
+                </TimeDisplay>
                 <ProgressBar id='seekbar' value="0" max='1' />
                 <div> 
                     <button onClick={()=> document.getElementById('player').play()}>▶️</button> 
