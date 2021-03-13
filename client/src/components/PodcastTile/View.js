@@ -19,27 +19,32 @@ const PodImage = styled.img`
 `
 
 export default function View() {
-    const [podcast, setPodcast] = useState({})
+    const [pod, setPod] = useState({})
     useEffect(()=> {
         getPodcastEpisode('634ceb8f39f648e792ae2add00e084a1') //TODO: hardcoded episode ID Needs changed
             .then(data => {
-                setPodcast(data)
+                setPod(data)
             })
+            .catch(err => console.log(err))
     },[])
     
     return(
         <Container>
             <div>
                 <div>
-                    <PodImage src={podcast.image} alt={`Podcast: ${podcast.title}`}/>
+                    <PodImage src={pod.image} alt={`Podcast: ${pod.title}`}/>
                 </div>
                 <div>
-                    <div>{ podcast.title }</div>
-                    <div>{ podcast.podcast.title }</div>
+                    <div>{ pod.title }</div>
+                    <div>{ pod.podcast.title }</div>
                 </div>
             </div>
             <div>
-            <audio controls="controls" src={podcast.audio}/>
+                <audio id='player' src={pod.audio}/>
+                <div> 
+                    <button onClick={()=> document.getElementById('player').play()}>Play</button> 
+                    <button onClick={()=> document.getElementById('player').pause()}>Pause</button> 
+                </div>
             </div>
             <div>
                 Player Control Buttons
