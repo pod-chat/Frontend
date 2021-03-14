@@ -52,25 +52,50 @@ const PodcastTitle = styled.div`
 const ProgressBar = styled.progress`
     width: 100%;
     margin: 0 auto;
+    height: 25px;
+`
+const TimeDisplay = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+const TimeStamp = styled.div`
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 16px;
+    margin-bottom: -5px;
 `
 
-//HELPER FUNCTION
-const audioProgress = () => {
-    const currentTime = document.querySelector('#player').currentTime
-    const duration = document.querySelector('#player').duration
-    document.querySelector('#seekbar').setAttribute("value", currentTime / duration)
-}
 
+
+// ? may not be needed now. Refernecing this blog: https://www.erikverweij.dev/blog/building-a-minimal-audioplayer/
+
+
+// COMPONENET //
 export default function View() {
+    const audioRef = React.useRef(null);
+
     const [pod, setPod] = useState({})
+    const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(0);
+    const [progress, setProgress] = useState(0); //TODO figure out how to make progress bar show correctly on load, not on play
+
     useEffect(()=> {
         getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
             .then(data => {
                 setPod(data)
             })
             .catch(err => console.log(err))
+        setProgress(audioRef.current.currentTime / duration)
     },[])
     
+    // HELPLER FUNCTIONS //
+    //Time: seconds -> H:mm:ss
+    const formatTime = (seconds) => {
+        return (
+            new Date(seconds * 1000).toISOString().substr(12,7) //converts seconds to H:mm:ss
+        )
+    }
+
     return(
         <Container>
             <PodInfoDiv>
@@ -86,8 +111,28 @@ export default function View() {
                 </PodTitleEpisodeDiv>
             </PodInfoDiv>
             <div>
-                <audio id='player' onTimeUpdate={()=> audioProgress()} src={`${pod.audio}#t=1000,3000`}/>
-                <ProgressBar id='seekbar' value="0" max='1' />
+                {/* //TODO: figure out how to change the audio playback range from user input */}
+                <audio 
+                    id='player' 
+                    ref={audioRef} 
+                    onLoadedData={() => {
+                        setDuration(audioRef.current.duration);
+                        setProgress(audioRef.current.currentTime / duration);
+                    }}
+                        
+                    onTimeUpdate={() => {
+                        // on update, retrieve currentTime from ref,
+                        // store it in state
+                        setCurrentTime(audioRef.current.currentTime);
+                        setProgress(audioRef.current.currentTime / duration);
+                    }}            
+                    src={`${pod.audio}#t=1000,3000`}
+                /> 
+                <TimeDisplay>
+                    <TimeStamp>{formatTime(currentTime)}</TimeStamp>
+                    <TimeStamp>{formatTime(duration)}</TimeStamp>
+                </TimeDisplay>
+                <ProgressBar id='seekbar' value={progress} max='1' />
                 <div> 
                     <button onClick={()=> document.getElementById('player').play()}>▶️</button> 
                     <button onClick={()=> document.getElementById('player').pause()}>⏸</button> 
