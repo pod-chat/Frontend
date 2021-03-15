@@ -73,12 +73,14 @@ const TimeStamp = styled.div`
 // COMPONENET //
 export default function View() {
     const audioRef = React.useRef(null);
+    const buttonRef = React.useRef(null);
 
     const [pod, setPod] = useState({})
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [progress, setProgress] = useState(0); 
-    const [playbackStatus, setPlaybackStatus] = useState('pause')
+    const [isPlaying, setIsPlaying] = useState(false)
+
 
     useEffect(()=> {
         getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
@@ -87,6 +89,10 @@ export default function View() {
             })
             .catch(err => console.log(err))
     },[])
+
+    useEffect(() => {
+        isPlaying ? buttonRef.current.textContent = '⏸' : buttonRef.current.textContent = '▶️'
+    }, [isPlaying])
     
     // HELPLER FUNCTIONS //
     //Time: seconds -> H:mm:ss
@@ -97,15 +103,18 @@ export default function View() {
     }
 
     const togglePlaybackStatus = () => {
-        if (playbackStatus === 'play') {
-            audioRef.current.pause();
-            setPlaybackStatus('pause');
-        }
-        if (playbackStatus === 'pause') {
+        if (audioRef.current.paused) {
             audioRef.current.play();
-            setPlaybackStatus('play');
+            setIsPlaying(true);
+            console.log(audioRef.current.paused)
+        }
+        else if (!audioRef.current.paused) {
+            audioRef.current.pause();
+            setIsPlaying(false);
+            console.log(audioRef.current.paused)
         }
     }
+
 
     return(
         <Container>
@@ -126,7 +135,7 @@ export default function View() {
                     id='player' 
                     ref={audioRef} 
                     onLoadedData={() => {
-                        setPlaybackStatus('pause')
+                        setIsPlaying(false)
                         setDuration(audioRef.current.duration);
                     }}
                     onLoadedMetadata={() => {
@@ -138,7 +147,9 @@ export default function View() {
                         // store it in state
                         setCurrentTime(audioRef.current.currentTime);
                         setProgress(audioRef.current.currentTime / duration);
-                    }}            
+                    }}       
+                    onPlay={()=> setIsPlaying(true)} 
+                    onPause={()=> setIsPlaying(false)} 
                     src={`${pod.audio}#t=1000,3000`} //TODO: set clip beginning and end times (in seconds) from stored data when user posts. Apply them here.
                 /> 
                 <TimeDisplay>
@@ -147,7 +158,7 @@ export default function View() {
                 </TimeDisplay>
                 <ProgressBar id='seekbar' value={progress} max='1' />
                 <div> 
-                    <button onClick={()=> togglePlaybackStatus()}>{playbackStatus === 'play' ? '⏸' : '▶️'}</button> 
+                    <button ref={buttonRef} onClick={()=> togglePlaybackStatus()}>'▶️'</button> 
                 </div>
             </div>
         </Container>
