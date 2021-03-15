@@ -77,7 +77,8 @@ export default function View() {
     const [pod, setPod] = useState({})
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
-    const [progress, setProgress] = useState(0); //TODO figure out how to make progress bar show correctly on load, not on play
+    const [progress, setProgress] = useState(0); 
+    const [playbackStatus, setPlaybackStatus] = useState('pause')
 
     useEffect(()=> {
         getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
@@ -85,7 +86,6 @@ export default function View() {
                 setPod(data)
             })
             .catch(err => console.log(err))
-        setProgress(audioRef.current.currentTime / duration)
     },[])
     
     // HELPLER FUNCTIONS //
@@ -94,6 +94,17 @@ export default function View() {
         return (
             new Date(seconds * 1000).toISOString().substr(12,7) //converts seconds to H:mm:ss
         )
+    }
+
+    const togglePlaybackStatus = () => {
+        if (playbackStatus === 'play') {
+            audioRef.current.pause();
+            setPlaybackStatus('pause');
+        }
+        if (playbackStatus === 'pause') {
+            audioRef.current.play();
+            setPlaybackStatus('play');
+        }
     }
 
     return(
@@ -111,22 +122,24 @@ export default function View() {
                 </PodTitleEpisodeDiv>
             </PodInfoDiv>
             <div>
-                {/* //TODO: figure out how to change the audio playback range from user input */}
                 <audio 
                     id='player' 
                     ref={audioRef} 
                     onLoadedData={() => {
+                        setPlaybackStatus('pause')
+                        setDuration(audioRef.current.duration);
+                    }}
+                    onLoadedMetadata={() => {
                         setDuration(audioRef.current.duration);
                         setProgress(audioRef.current.currentTime / duration);
                     }}
-                        
                     onTimeUpdate={() => {
                         // on update, retrieve currentTime from ref,
                         // store it in state
                         setCurrentTime(audioRef.current.currentTime);
                         setProgress(audioRef.current.currentTime / duration);
                     }}            
-                    src={`${pod.audio}#t=1000,3000`}
+                    src={`${pod.audio}#t=1000,3000`} //TODO: set clip beginning and end times (in seconds) from stored data when user posts. Apply them here.
                 /> 
                 <TimeDisplay>
                     <TimeStamp>{formatTime(currentTime)}</TimeStamp>
@@ -134,8 +147,7 @@ export default function View() {
                 </TimeDisplay>
                 <ProgressBar id='seekbar' value={progress} max='1' />
                 <div> 
-                    <button onClick={()=> document.getElementById('player').play()}>▶️</button> 
-                    <button onClick={()=> document.getElementById('player').pause()}>⏸</button> 
+                    <button onClick={()=> togglePlaybackStatus()}>{playbackStatus === 'play' ? '⏸' : '▶️'}</button> 
                 </div>
             </div>
         </Container>

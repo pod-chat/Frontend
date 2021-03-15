@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-
-
 export const getPodcastEpisode = (id) => { //Get podcast episode from ListenNotes.com through their /episodes/{id} endpoint
 
     //TODO: replace with actual api link base url   
@@ -15,7 +13,6 @@ export const getPodcastEpisode = (id) => { //Get podcast episode from ListenNote
     
     return axios(config)
         .then(res => {
-            console.log(res);
             return(res.data);
         })
         .catch(err => {
