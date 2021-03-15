@@ -85,7 +85,6 @@ export default function View() {
                 setPod(data)
             })
             .catch(err => console.log(err))
-        setProgress(audioRef.current.currentTime / duration)
     },[])
     
     // HELPLER FUNCTIONS //
@@ -117,9 +116,11 @@ export default function View() {
                     ref={audioRef} 
                     onLoadedData={() => {
                         setDuration(audioRef.current.duration);
+                    }}
+                    onLoadedMetadata={() => {
+                        setDuration(audioRef.current.duration);
                         setProgress(audioRef.current.currentTime / duration);
                     }}
-                        
                     onTimeUpdate={() => {
                         // on update, retrieve currentTime from ref,
                         // store it in state
