@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import {getPodcastEpisode} from '../../services/podcastServices'
 import Play from './Play'
 import Pause from './Pause'
+import SkipBack from './SkipBack'
+import SkipForward from './SkipForward'
 
 // STYLING // Styled Components
 const Container = styled.div`
@@ -66,6 +68,14 @@ const TimeStamp = styled.div`
     margin-bottom: -5px;
 `
 
+const PlayerControls = styled.div`
+    width: 40%;
+    margin: 0 auto;
+    height: 30px;
+    display: flex;
+    justify-content: space-around;
+`
+
 
 
 // ? may not be needed now. Refernecing this blog: https://www.erikverweij.dev/blog/building-a-minimal-audioplayer/
@@ -74,7 +84,6 @@ const TimeStamp = styled.div`
 // COMPONENET //
 export default function View() {
     const audioRef = React.useRef(null);
-    const buttonRef = React.useRef(null);
     const progBarRef = React.useRef(null);
 
     // STATE //
@@ -161,9 +170,11 @@ export default function View() {
 
                 <ProgressBar ref={progBarRef} type='range' min='0' max={duration} step='0.25' value={isSeeking ? progBarRef.current.value : currentTime} onChange={()=> playHead(Number(progBarRef.current.value))} />
 
-                <div> 
+                <PlayerControls> 
+                    <SkipBack />
                     {isPlaying ? <Pause togglePlaybackStatus={togglePlaybackStatus}/> : <Play togglePlaybackStatus={togglePlaybackStatus}/>}
-                </div>
+                    <SkipForward />
+                </PlayerControls>
             </div>
         </Container>
     )

@@ -2,9 +2,10 @@ import React from 'react'
 
 const Pause = ({togglePlaybackStatus}) => {
   return (
-    <svg viewBox="0 0 60 60" onClick={() => togglePlaybackStatus()}>
-      <polygon points="0,0 15,0 15,60 0,60" />
-      <polygon points="25,0 40,0 40,60 25,60" />
+    <svg viewBox="0 0 1 1" onClick={() => togglePlaybackStatus()}>
+        <g>
+            <path d="M.15.15h.262v.7H.15zM.588.15H.85v.7H.588z" />
+        </g>
     </svg>
   )
 }
