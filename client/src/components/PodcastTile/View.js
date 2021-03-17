@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import {getPodcastEpisode} from '../../services/podcastServices'
-
+import Play from './Play'
+import Pause from './Pause'
 
 // STYLING // Styled Components
 const Container = styled.div`
@@ -91,10 +92,6 @@ export default function View() {
             })
             .catch(err => console.log(err))
     },[])
-
-    useEffect(() => {
-        isPlaying ? buttonRef.current.textContent = '⏸' : buttonRef.current.textContent = '▶️'
-    }, [isPlaying])
     
     // HELPLER FUNCTIONS //
     //Time: seconds -> H:mm:ss
@@ -165,7 +162,7 @@ export default function View() {
                 <ProgressBar ref={progBarRef} type='range' min='0' max={duration} step='0.25' value={isSeeking ? progBarRef.current.value : currentTime} onChange={()=> playHead(Number(progBarRef.current.value))} />
 
                 <div> 
-                    <button ref={buttonRef} onClick={()=> togglePlaybackStatus()}>'▶️'</button> 
+                    {isPlaying ? <Pause togglePlaybackStatus={togglePlaybackStatus}/> : <Play togglePlaybackStatus={togglePlaybackStatus}/>}
                 </div>
             </div>
         </Container>
