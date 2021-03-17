@@ -81,6 +81,7 @@ export default function View() {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false)
+    const [isSeeking, setIsSeeking] = useState(false)
 
     // EFFECTS // 
     useEffect(()=> {
@@ -117,8 +118,9 @@ export default function View() {
     }
 
     const playHead = (time) => {
+        setIsSeeking(true)
+        audioRef.current.currentTime = time
         setCurrentTime(time)
-        audioRef.current.currentTime = currentTime
     }
 
     // JSX //
@@ -144,14 +146,12 @@ export default function View() {
                         setIsPlaying(false)
                         setDuration(audioRef.current.duration);
                     }}
-                    onLoadedMetadata={() => {
-                        setDuration(audioRef.current.duration);
-                    }}
                     onTimeUpdate={() => {
                         // on update, retrieve currentTime from ref,
                         // store it in state
                         setCurrentTime(audioRef.current.currentTime);
-                    }}       
+                    }}  
+
                     onPlay={()=> setIsPlaying(true)} 
                     onPause={()=> setIsPlaying(false)} 
                     src={`${pod.audio}#t=1000,3000`} //TODO: set clip beginning and end times (in seconds) from stored data when user posts. Apply them here.
@@ -162,7 +162,7 @@ export default function View() {
                     <TimeStamp>{formatTime(duration)}</TimeStamp>
                 </TimeDisplay>
 
-                <ProgressBar ref={progBarRef} type='range' min='0' max={duration} step='0.25' value={currentTime} onChange={()=> playHead(Number(progBarRef.current.value))} />
+                <ProgressBar ref={progBarRef} type='range' min='0' max={duration} step='0.25' value={isSeeking ? progBarRef.current.value : currentTime} onChange={()=> playHead(Number(progBarRef.current.value))} />
 
                 <div> 
                     <button ref={buttonRef} onClick={()=> togglePlaybackStatus()}>'▶️'</button> 
