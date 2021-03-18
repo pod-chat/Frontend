@@ -73,7 +73,7 @@ const PlayerControls = styled.div`
     margin: 0 auto;
     height: 30px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 `
 
 
@@ -171,7 +171,7 @@ export default function View() {
 
                     onPlay={()=> setIsPlaying(true)} 
                     onPause={()=> setIsPlaying(false)} 
-                    src={`${pod.audio}#t=1000,3000`} //TODO: set clip beginning and end times (in seconds) from stored data when user posts. Apply them here.
+                    src={`${pod.audio}#t=600,620`} //TODO: set clip beginning and end times (in seconds) from stored data when user posts. Apply them here.
                 /> 
 
                 <TimeDisplay>
@@ -185,14 +185,14 @@ export default function View() {
                     <SkipBack skip={skip}/>
                     {isPlaying ? <Pause togglePlaybackStatus={togglePlaybackStatus}/> : <Play togglePlaybackStatus={togglePlaybackStatus}/>}
                     <SkipForward skip={skip}/>
-                    <div>
-                        <select id='playSpeedDropdown' name='playbackSpeed' onChange={() => playerSpeed()}>
-                            <option value="1">1.0x</option>
-                            <option value="1.25">1.25x</option>
-                            <option value="1.5">1.5x</option>
-                        </select>
-                    </div>
                 </PlayerControls>
+                <div>
+                    <select id='playSpeedDropdown' name='playbackSpeed' onChange={() => playerSpeed()}>
+                        <option value="1">1.0x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                    </select>
+                </div>
             </div>
         </Container>
     )
