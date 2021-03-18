@@ -69,11 +69,25 @@ const TimeStamp = styled.div`
 `
 
 const PlayerControls = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+
+const SkipPlay = styled.div`
     width: 40%;
     margin: 0 auto;
     height: 30px;
+    padding: 2px 0px;
     display: flex;
     justify-content: space-between;
+`
+
+const PlaySpeed = styled.div`
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
 `
 
 
@@ -181,18 +195,21 @@ export default function View() {
 
                 <ProgressBar ref={progBarRef} type='range' min='0' max={duration} step='0.25' value={isSeeking ? progBarRef.current.value : currentTime} onChange={()=> playHead(Number(progBarRef.current.value))} />
 
-                <PlayerControls> 
-                    <SkipBack skip={skip}/>
-                    {isPlaying ? <Pause togglePlaybackStatus={togglePlaybackStatus}/> : <Play togglePlaybackStatus={togglePlaybackStatus}/>}
-                    <SkipForward skip={skip}/>
+                <PlayerControls>
+                    <PlaySpeed></PlaySpeed>
+                    <SkipPlay> 
+                        <SkipBack skip={skip}/>
+                        {isPlaying ? <Pause togglePlaybackStatus={togglePlaybackStatus}/> : <Play togglePlaybackStatus={togglePlaybackStatus}/>}
+                        <SkipForward skip={skip}/>
+                    </SkipPlay>
+                    <PlaySpeed>
+                        <select id='playSpeedDropdown' name='playbackSpeed' onChange={() => playerSpeed()}>
+                            <option value="1">1.0x</option>
+                            <option value="1.25">1.25x</option>
+                            <option value="1.5">1.5x</option>
+                        </select>
+                    </PlaySpeed>
                 </PlayerControls>
-                <div>
-                    <select id='playSpeedDropdown' name='playbackSpeed' onChange={() => playerSpeed()}>
-                        <option value="1">1.0x</option>
-                        <option value="1.25">1.25x</option>
-                        <option value="1.5">1.5x</option>
-                    </select>
-                </div>
             </div>
         </Container>
     )
