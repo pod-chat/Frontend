@@ -1,7 +1,7 @@
 import React from 'react'
 
-const SkipForward = () => (
-  <svg viewBox="0 0 71 71">
+const SkipForward = ({skip}) => (
+  <svg viewBox="0 0 71 71" onClick={()=> skip(15)}>
     <defs>
       <clipPath id="prefix__a">
         <path d="M.5 71.5V.5h71v71z" />

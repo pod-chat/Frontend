@@ -129,6 +129,11 @@ export default function View() {
         setCurrentTime(time)
     }
 
+    const skip = (value) => {
+        audioRef.current.currentTime = (currentTime + value)
+        setCurrentTime(currentTime + value)
+    }
+
     // JSX //
     return(
         <Container>
@@ -171,9 +176,9 @@ export default function View() {
                 <ProgressBar ref={progBarRef} type='range' min='0' max={duration} step='0.25' value={isSeeking ? progBarRef.current.value : currentTime} onChange={()=> playHead(Number(progBarRef.current.value))} />
 
                 <PlayerControls> 
-                    <SkipBack />
+                    <SkipBack skip={skip}/>
                     {isPlaying ? <Pause togglePlaybackStatus={togglePlaybackStatus}/> : <Play togglePlaybackStatus={togglePlaybackStatus}/>}
-                    <SkipForward />
+                    <SkipForward skip={skip}/>
                 </PlayerControls>
             </div>
         </Container>
