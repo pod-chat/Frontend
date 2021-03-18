@@ -134,6 +134,12 @@ export default function View() {
         setCurrentTime(currentTime + value)
     }
 
+    const playerSpeed = () => {
+        const speed = document.querySelector('#playSpeedDropdown').value
+        audioRef.current.playbackRate = (speed);
+        console.log(audioRef.current.playbackRate)
+    }
+
     // JSX //
     return(
         <Container>
@@ -179,6 +185,13 @@ export default function View() {
                     <SkipBack skip={skip}/>
                     {isPlaying ? <Pause togglePlaybackStatus={togglePlaybackStatus}/> : <Play togglePlaybackStatus={togglePlaybackStatus}/>}
                     <SkipForward skip={skip}/>
+                    <div>
+                        <select id='playSpeedDropdown' name='playbackSpeed' onChange={() => playerSpeed()}>
+                            <option value="1">1.0x</option>
+                            <option value="1.25">1.25x</option>
+                            <option value="1.5">1.5x</option>
+                        </select>
+                    </div>
                 </PlayerControls>
             </div>
         </Container>

@@ -1,7 +1,16 @@
 import React from 'react'
+import styled from 'styled-components'
+
+// STYLING //
+const SkipButton = styled.svg`
+  cursor: pointer;
+  &:hover {
+    opacity: 50%;
+  }
+`
 
 const SkipForward = ({skip}) => (
-  <svg viewBox="0 0 71 71" onClick={()=> skip(15)}>
+  <SkipButton viewBox="0 0 71 71" onClick={()=> skip(15)}>
     <defs>
       <clipPath id="prefix__a">
         <path d="M.5 71.5V.5h71v71z" />
@@ -31,11 +40,11 @@ const SkipForward = ({skip}) => (
       y={44}
       fontSize={23}
       fill="currentColor"
-      className="prefix__svgcentertext"
+      className="prefix__SkipButtoncentertext"
     >
       15
     </text>
-  </svg>
+  </SkipButton>
 )
 
 export default SkipForward
