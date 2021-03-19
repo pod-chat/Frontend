@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import {getPodcastEpisode} from '../../services/podcastServices'
-
+import Play from './Play'
+import Pause from './Pause'
+import SkipBack from './SkipBack'
+import SkipForward from './SkipForward'
 
 // STYLING // Styled Components
 const Container = styled.div`
@@ -65,6 +68,28 @@ const TimeStamp = styled.div`
     margin-bottom: -5px;
 `
 
+const PlayerControls = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+
+const SkipPlay = styled.div`
+    width: 40%;
+    margin: 0 auto;
+    height: 30px;
+    padding: 2px 0px;
+    display: flex;
+    justify-content: space-between;
+`
+
+const PlaySpeed = styled.div`
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+`
+
 
 
 // ? may not be needed now. Refernecing this blog: https://www.erikverweij.dev/blog/building-a-minimal-audioplayer/
@@ -73,7 +98,6 @@ const TimeStamp = styled.div`
 // COMPONENET //
 export default function View() {
     const audioRef = React.useRef(null);
-    const buttonRef = React.useRef(null);
     const progBarRef = React.useRef(null);
 
     // STATE //
@@ -91,10 +115,6 @@ export default function View() {
             })
             .catch(err => console.log(err))
     },[])
-
-    useEffect(() => {
-        isPlaying ? buttonRef.current.textContent = '⏸' : buttonRef.current.textContent = '▶️'
-    }, [isPlaying])
     
     // HELPLER FUNCTIONS //
     //Time: seconds -> H:mm:ss
@@ -121,6 +141,17 @@ export default function View() {
         setIsSeeking(true)
         audioRef.current.currentTime = time
         setCurrentTime(time)
+    }
+
+    const skip = (value) => {
+        audioRef.current.currentTime = (currentTime + value)
+        setCurrentTime(currentTime + value)
+    }
+
+    const playerSpeed = () => {
+        const speed = document.querySelector('#playSpeedDropdown').value
+        audioRef.current.playbackRate = (speed);
+        console.log(audioRef.current.playbackRate)
     }
 
     // JSX //
@@ -154,7 +185,7 @@ export default function View() {
 
                     onPlay={()=> setIsPlaying(true)} 
                     onPause={()=> setIsPlaying(false)} 
-                    src={`${pod.audio}#t=1000,3000`} //TODO: set clip beginning and end times (in seconds) from stored data when user posts. Apply them here.
+                    src={`${pod.audio}#t=600,620`} //TODO: set clip beginning and end times (in seconds) from stored data when user posts. Apply them here.
                 /> 
 
                 <TimeDisplay>
@@ -164,9 +195,21 @@ export default function View() {
 
                 <ProgressBar ref={progBarRef} type='range' min='0' max={duration} step='0.25' value={isSeeking ? progBarRef.current.value : currentTime} onChange={()=> playHead(Number(progBarRef.current.value))} />
 
-                <div> 
-                    <button ref={buttonRef} onClick={()=> togglePlaybackStatus()}>'▶️'</button> 
-                </div>
+                <PlayerControls>
+                    <PlaySpeed></PlaySpeed>
+                    <SkipPlay> 
+                        <SkipBack skip={skip}/>
+                        {isPlaying ? <Pause togglePlaybackStatus={togglePlaybackStatus}/> : <Play togglePlaybackStatus={togglePlaybackStatus}/>}
+                        <SkipForward skip={skip}/>
+                    </SkipPlay>
+                    <PlaySpeed>
+                        <select id='playSpeedDropdown' name='playbackSpeed' onChange={() => playerSpeed()}>
+                            <option value="1">1.0x</option>
+                            <option value="1.25">1.25x</option>
+                            <option value="1.5">1.5x</option>
+                        </select>
+                    </PlaySpeed>
+                </PlayerControls>
             </div>
         </Container>
     )
