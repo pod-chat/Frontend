@@ -12,7 +12,8 @@ export default function FullPostBody() {
 
     return (
         <BodyDiv>
-            Have you ever tasted Elk heart? so good for you, one of the leanest meats. I've got some i'll give you it on the way out. How dare you? Jamie pull up that gif of Tortoises! mic closer and all Read More
+            <p>Have you ever tasted Elk heart? so good for you, one of the leanest meats. I've got some i'll give you it on the way out. How dare you? Jamie pull up that gif of Tortoises! mic closer and all. More text more text</p>
+            <p>Have you ever tasted Elk heart? so good for you, one of the leanest meats. I've got some i'll give you it on the way out. How dare you? Jamie pull up that gif of Tortoises! mic closer and all. More text more text</p>
         </BodyDiv>
     )
 }
