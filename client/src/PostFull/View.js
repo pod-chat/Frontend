@@ -7,6 +7,7 @@ import styled from 'styled-components'
 //Top Level Components Import
 import PodcastTile from '../components/PodcastTile'
 import EngagementOptions from '../components/EngagementOptions'
+import FullPostAuthor from './FullPostAuthor'
 
 
 //Styling - Styled Components
@@ -21,6 +22,7 @@ const PostContainer = styled.div`
 export default function View() {
     return(
         <PostContainer>
+            <FullPostAuthor />
             <PodcastTile />
             <EngagementOptions/>
         </PostContainer>
