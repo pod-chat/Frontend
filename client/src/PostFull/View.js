@@ -9,6 +9,7 @@ import PodcastTile from '../components/PodcastTile'
 import EngagementOptions from '../components/EngagementOptions'
 import FullPostAuthor from './FullPostAuthor'
 import FullPostTitle from './FullPostTitle'
+import FullPostBody from './FullPostBody'
 
 
 //Styling - Styled Components
@@ -26,6 +27,7 @@ export default function View() {
             <FullPostAuthor />
             <FullPostTitle />
             <PodcastTile />
+            <FullPostBody />
             <EngagementOptions/>
         </PostContainer>
     )
