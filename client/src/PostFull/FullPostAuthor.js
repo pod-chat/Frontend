@@ -14,6 +14,16 @@ const AuthorImgBig = styled.img`
     border-radius: 8px;
     object-fit: cover;
 `
+const PostAuthorAgeDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+`
+
+const PostAuthorDetails = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
 
 const AuthorName = styled.div`
     font-weight: 700;
@@ -26,13 +36,25 @@ const AuthorHandle = styled.div`
     margin-left: 5px;
 `
 
+const PostAge = styled.div`
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 5px;
+    color: gray;
+`
+
 export default function FullPostAuthor() {
 
     return (
         <AuthorDiv>
                 <AuthorImgBig src='https://pyxis.nymag.com/v1/imgs/a62/6fe/0eac2a6f2d97817064adbee944d0129ea2-bernie-sanders.rhorizontal.w700.jpg' />
-                <AuthorName>Bernie Sanders</AuthorName>
-                <AuthorHandle>@BernieSanders</AuthorHandle>
+                <PostAuthorAgeDiv>
+                    <PostAuthorDetails>
+                        <AuthorName>Bernie Sanders</AuthorName>
+                        <AuthorHandle>@BernieSanders</AuthorHandle>
+                    </PostAuthorDetails>
+                    <PostAge>20h</PostAge>
+                </PostAuthorAgeDiv>     
         </AuthorDiv>
     )
 }
