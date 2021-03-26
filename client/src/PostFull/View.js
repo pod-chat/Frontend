@@ -20,18 +20,28 @@ const PostContainer = styled.div`
     margin: 0 auto;
     margin-bottom: 5px;
 `
+const CommentContainer = styled.div`
+    background-color: #f8f8f8;
+    padding: 10px;
+    max-width: 375px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+`
 //Component
 export default function View() {
     return(
-
-        <PostContainer>
-            <FullPostAuthor />
-            <FullPostTitle />
-            <PodcastTile />
-            <FullPostBody />
-            <EngagementOptions/>
-            <Comments />
-        </PostContainer>
+        <>
+            <PostContainer>
+                <FullPostAuthor />
+                <FullPostTitle />
+                <PodcastTile />
+                <FullPostBody />
+                <EngagementOptions/>
+            </PostContainer>
+            <CommentContainer>
+                <Comments />
+            </CommentContainer>
+        </>
 
     )
 }
