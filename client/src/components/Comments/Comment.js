@@ -1,4 +1,6 @@
 import React from 'react'
+import styled from 'styled-components'
+
 
 export default function Comment({ comment }) {
     const nestedComments = (comment.children || []).map((comment) => {
@@ -6,7 +8,7 @@ export default function Comment({ comment }) {
     });
   
     return (
-      <div style={{ marginLeft: "25px", marginTop: "10px" }}>
+      <div className={comment.lineage ? 'childComment' : 'parentComment'}>
         <div>{`${comment.comment} · ${comment.user_name}`}</div>
         {nestedComments}
       </div>

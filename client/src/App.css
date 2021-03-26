@@ -1,3 +1,23 @@
 .App {
     background-color: #F8F8F8;
+    box-sizing: border-box;
+}
+
+.parentComment {
+    margin-bottom: 10px;
+    padding: 4px 0px 0px 0px;
+}
+
+.parentComment div {
+    padding-bottom: 6px;
+}
+
+.childComment {
+    margin-left: 10px;
+    padding: 4px 0px 0px 4px;
+    border-left: 2px solid black;
+}
+
+.childComment div {
+    padding: 4px 0px 6px 4px;
 }
