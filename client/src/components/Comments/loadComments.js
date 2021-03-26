@@ -1,7 +1,192 @@
-import axios from 'axios'
+
 
 //TODO: axios call to get data
 
+const fakeCommentData = [
+    {
+      comment_id: 4,
+      lineage: "",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "Joe Rogan",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "Badass post! You should come on my pod so we can chat!",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    },
+
+    {
+      comment_id: 7,
+      lineage: "",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "Trump",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "Make America Great Again!",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    },
+
+    {
+      comment_id: 8,
+      lineage: "7/",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "Bernie Sanders",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "Trump, you are an idiot and a disgrace.",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    },
+
+    {
+      comment_id: 100,
+      lineage: "1/2/3/99/",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "JOJO",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "New Child Comment",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    },
+
+    {
+      comment_id: 99,
+      lineage: "1/2/3/",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "JOJO",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "New Child Comment",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    },
+
+    {
+      comment_id: 3,
+      lineage: "1/2/",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "Clint Fix",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "Thanks, Juan! I appreciate you! Lets build a killer app!",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    },
+
+    {
+      comment_id: 9,
+      lineage: "1/5/",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "Clint Fix",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "JJ! I cannot wait to hang out again!",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    },
+
+    {
+      comment_id: 2,
+      lineage: "1/",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "Juan Ruiz",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "Clint made a fantastic point. Well said, Clint!",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    },
+
+    {
+      comment_id: 5,
+      lineage: "1/",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "JJ Salway",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "Clint! What is up, dude? We need to hang out again!",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    },
+
+    {
+      comment_id: 1,
+      lineage: "",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "Clint Fix",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "This is my comment on this post. I think it is brilliant.",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    },
+
+    {
+      comment_id: 6,
+      lineage: "4/",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "Elon Musk",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "Joe! We need to do another podcast and talk about Dogecoin!",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    },
+
+    {
+      comment_id: 10,
+      lineage: "7/8/",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "Trump",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "Shut up you old socialist idiot.",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    },
+
+    {
+      comment_id: 155,
+      lineage: "1/",
+      post_id: 1234,
+      user_id: 98734343,
+      user_name: "Trump",
+      user_img:
+        "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
+      comment: "ANOTHER TEST COMMENT",
+      comment_created_on: "date",
+      upvotes: 10,
+      downvotes: 3
+    }
+  ]
+
+//Function that takes flat comment data and returns new array with comments nested
 const nestComments = (commentData) => {
 
     //Temporary object that will will be shaped like this: lineage: [array of children]
@@ -56,4 +241,8 @@ const nestComments = (commentData) => {
     
     //return array of comments that are nicely nested
     return(newArr)
+}
+
+export const loadComments = () => {
+    return nestComments(fakeCommentData)
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 //PostFeed Components Import
-
+import Comments from '../components/Comments'
 
 //Top Level Components Import
 import PodcastTile from '../components/PodcastTile'
@@ -23,12 +23,15 @@ const PostContainer = styled.div`
 //Component
 export default function View() {
     return(
+
         <PostContainer>
             <FullPostAuthor />
             <FullPostTitle />
             <PodcastTile />
             <FullPostBody />
             <EngagementOptions/>
+            <Comments />
         </PostContainer>
+
     )
 }
