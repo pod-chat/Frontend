@@ -12,9 +12,9 @@ const fakeCommentData = [
       user_handle: '@JoeRogan',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
-      comment: "Badass post! You should come on my pod so we can chat!",
+      comment: "Upvotes: 1. Badass post! You should come on my pod so we can chat!",
       comment_created_on: "date",
-      upvotes: 10,
+      upvotes: 4,
       downvotes: 3
     },
 
@@ -27,9 +27,9 @@ const fakeCommentData = [
       user_handle: '@Trump',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
-      comment: "Make America Great Again!",
+      comment: "Upvotes: 2. Make America Great Again!",
       comment_created_on: "date",
-      upvotes: 10,
+      upvotes: 5,
       downvotes: 3
     },
 
@@ -147,9 +147,9 @@ const fakeCommentData = [
       user_handle: '@ClintFix',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
-      comment: "This is my comment on this post. I think it is brilliant.",
+      comment: "UPVOTES: 3. This is my comment on this post. I think it is brilliant.",
       comment_created_on: "date",
-      upvotes: 10,
+      upvotes: 6,
       downvotes: 3
     },
 
@@ -220,7 +220,7 @@ const nestComments = (commentData) => {
     // looks at tempObj keys to see if there is one that matches the given lineage. 
     // If true, creates a 'children' key on the comment
     // before setting a value to the new key, 
-    // the array on the matching tempObj is sorted by comment_id (larger means older)
+    // the array on the matching tempObj is sorted by upvotes-downvotes
     // then maps through the array and calls the function recursively, this time passing in the child comment and what it's children(the grandchildren)'s lineage would be
     // once all decendents are collected in children arrays on teh appropriate comment, the parent comment passed into the function
     // has it's new children key populated.
@@ -229,7 +229,7 @@ const nestComments = (commentData) => {
     const checkEachComment = (comment, lineage) => {
       if (tempObj[lineage]) {
         comment.children = tempObj[lineage]
-          .sort((a, b) => a.comment_id - b.comment_id)
+          .sort((a, b) => (b.upvotes - b.downvotes) - (a.upvotes-a.downvotes))
           .map((each) => checkEachComment(each, lineage + each.comment_id + "/"));
       }
 
@@ -243,10 +243,10 @@ const nestComments = (commentData) => {
     //start is an array of parent comments (those with no lineage)
     let starter = tempObj[""];
 
-    //sort starter by comment id, then go through each of them and call checkEachComment function on them. Push the resulting object to newArr.
+    //sort starter by upvotes-downvotes, then go through each of them and call checkEachComment function on them. Push the resulting object to newArr.
     // delete tempObj key:value for parent comments. tempObj should now be empty. 
     starter
-      .sort((a, b) => a.comment_id - b.comment_id)
+      .sort((a, b) => (b.upvotes - b.downvotes) - (a.upvotes-a.downvotes))
       .forEach((each) => {
         newArr.push(checkEachComment(each, each.comment_id + "/"));
         delete tempObj[""];
