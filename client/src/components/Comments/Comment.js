@@ -7,8 +7,8 @@ export default function Comment({ comment }) {
     });
   
     return (
-      <div className={comment.lineage ? 'childComment' : 'parentComment'}>
-        <div>{`${comment.comment} · ${comment.user_name}`}</div>
+      <div className={comment.lineage ? 'comment childComment' : 'comment parentComment'}>
+        <div className='commentText'>{`${comment.comment} · ${comment.user_name}`}</div>
         {nestedComments}
       </div>
     );
