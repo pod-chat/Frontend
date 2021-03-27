@@ -9,6 +9,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "Joe Rogan",
+      user_handle: '@JoeRogan',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "Badass post! You should come on my pod so we can chat!",
@@ -23,6 +24,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "Trump",
+      user_handle: '@Trump',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "Make America Great Again!",
@@ -37,6 +39,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "Bernie Sanders",
+      user_handle: '@Bernie',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "Trump, you are an idiot and a disgrace.",
@@ -51,6 +54,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "JOJO",
+      user_handle: '@JoJo',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "New Child Comment",
@@ -65,6 +69,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "JOJO",
+      user_handle: '@JoJo',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "New Child Comment",
@@ -79,6 +84,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "Clint Fix",
+      user_handle: '@ClintFix',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "Thanks, Juan! I appreciate you! Lets build a killer app!",
@@ -93,6 +99,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "Clint Fix",
+      user_handle: '@ClintFix',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "JJ! I cannot wait to hang out again!",
@@ -107,6 +114,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "Juan Ruiz",
+      user_handle: '@JuanRuiz',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "Clint made a fantastic point. Well said, Clint!",
@@ -121,6 +129,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "JJ Salway",
+      user_handle: '@Salway',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "Clint! What is up, dude? We need to hang out again!",
@@ -135,6 +144,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "Clint Fix",
+      user_handle: '@ClintFix',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "This is my comment on this post. I think it is brilliant.",
@@ -149,6 +159,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "Elon Musk",
+      user_handle: '@Elon',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "Joe! We need to do another podcast and talk about Dogecoin!",
@@ -163,6 +174,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "Trump",
+      user_handle: '@Trump',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "Shut up you old socialist idiot.",
@@ -177,6 +189,7 @@ const fakeCommentData = [
       post_id: 1234,
       user_id: 98734343,
       user_name: "Trump",
+      user_handle: '@Trump',
       user_img:
         "https://scontent-den4-1.xx.fbcdn.net/v/t1.0-9/94404241_10100258073401169_6641823304405483520_n.jpg?_nc_cat=100&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=BG-ydl9O8BEAX-7tMJw&_nc_ht=scontent-den4-1.xx&oh=d44aa1ecd7c1b58fb2764fda997f17bc&oe=607DCA8D",
       comment: "ANOTHER TEST COMMENT",

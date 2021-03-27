@@ -4,7 +4,7 @@
 }
 
 .comment {
-    font-size: 15px;
+    font-size: 13px;
     color: #494c50;
 }
 .parentComment {
@@ -15,7 +15,7 @@
 .childComment {
     margin-left: 6px;
     /* margin-top: 8px; */
-    padding: 8px 0px 0px 8px;
+    padding: 4px 0px 0px 8px;
     border-left: 2px solid rgb(209, 209, 209);
     display: flex;
     flex-direction: column;
