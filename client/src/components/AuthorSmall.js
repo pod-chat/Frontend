@@ -25,13 +25,13 @@ const AuthorHandle = styled.div`
     margin-left: 5px;
 `
 
-export default function PostAuthor() {
+export default function PostAuthor(props) {
 
     return (
         <AuthorDiv>
-                <AuthorImg src='https://www.washingtonpost.com/wp-stat/elections/2020/headshots/sanders-illo.png'/>
-                <AuthorName>Bernie Sanders</AuthorName>
-                <AuthorHandle>@BernieSanders</AuthorHandle>
+                <AuthorImg src={props.user_img} />
+                <AuthorName>{props.user_name}</AuthorName>
+                <AuthorHandle>{props.user_handle}</AuthorHandle>
         </AuthorDiv>
     )
 }

@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import PostRank from './PostRank'
 import PostTitle from './PostTitle'
 import PostBody from './PostBody'
-import PostAuthor from './PostAuthor'
+import PostAuthor from '../../components/AuthorSmall'
 
 //Top Level Components Import
 import PodcastTile from '../../components/PodcastTile'
