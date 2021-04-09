@@ -7,7 +7,7 @@ export default function Comments() {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        setData(loadComments()) //TODO: call loadComments.js module
+        setData(loadComments()) 
     }, [])
 
     return (
