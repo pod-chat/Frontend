@@ -3,9 +3,8 @@ import React from 'react'
 //Import Components
 import View from './View'
 
-export default function PodcastTile() {
-    
+export default function PodcastTile({props}) {
     return (
-        <View/>
+        <View props={props}/>
     )
 }

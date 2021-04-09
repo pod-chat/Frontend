@@ -96,7 +96,7 @@ const PlaySpeed = styled.div`
 
 
 // COMPONENET //
-export default function View(props) {
+export default function View({props}) {
     const audioRef = React.useRef(null);
     const progBarRef = React.useRef(null);
 
@@ -168,9 +168,9 @@ export default function View(props) {
                 </div>
                 <PodTitleEpisodeDiv>
                     {
-                        pod.title ? 
-                        <><EpisodeTitle>{ pod.title }</EpisodeTitle>
-                        <PodcastTitle>{ pod.podcast.title }</PodcastTitle></> : <div>loading...</div>
+                        pod.title || pod.title_original ? 
+                        <><EpisodeTitle>{ pod.title || pod.title_original}</EpisodeTitle>
+                        <PodcastTitle>{ pod.podcast.title  || pod.title_original}</PodcastTitle></> : <div>loading...</div>
                     }
                 </PodTitleEpisodeDiv>
             </PodInfoDiv>

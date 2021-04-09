@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PodcastTile from '../components/PodcastTile'
 
 // STYLING //
 const Container = styled.div`
@@ -52,6 +53,7 @@ const PodResult = (props) => {
     const { pod } = props;
     return (
         <Container>
+            <PodcastTile props={pod} />
             <PodInfoDiv>
                 <div>
                     <PodImage src={pod.image} alt={`Podcast: ${pod.title_original}`}/>
