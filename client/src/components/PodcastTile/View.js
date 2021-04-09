@@ -8,7 +8,7 @@ import SkipForward from './SkipForward'
 
 // STYLING // Styled Components
 const Container = styled.div`
-    height: 164px;
+    height: 100%;
     border-radius: 8px;
     background-color: #F6F6F6;
     margin-top: 10px;
@@ -109,8 +109,7 @@ export default function View({props}) {
 
     // EFFECTS // 
     useEffect(()=> {
-        console.log(props)
-        if (Object.keys(props).length === 0) {
+        if (!props || Object.keys(props).length === 0) {
             getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
                 .then(data => {
                     setPod(data)
@@ -170,7 +169,7 @@ export default function View({props}) {
                     {
                         pod.title || pod.title_original ? 
                         <><EpisodeTitle>{ pod.title || pod.title_original}</EpisodeTitle>
-                        <PodcastTitle>{ pod.podcast.title  || pod.title_original}</PodcastTitle></> : <div>loading...</div>
+                        <PodcastTitle>{ pod.podcast.title  || pod.podcast.title_original}</PodcastTitle></> : <div>loading...</div>
                     }
                 </PodTitleEpisodeDiv>
             </PodInfoDiv>
