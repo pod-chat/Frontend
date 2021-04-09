@@ -9,12 +9,10 @@ const Container = styled.div`
     margin-top: 10px;
     padding: 10px;
 `
-
 const PodInfoDiv = styled.div`
     display: flex;
     justify-content: flex-start;
 `
-
 const PodTitleEpisodeDiv = styled.div`
     display: flex;
     flex-direction: column;
@@ -49,7 +47,6 @@ const PodcastTitle = styled.div`
     font-size: 13px;
     color: darkgray;
 `
-
 
 const PodResult = (props) => {
     const { pod } = props;

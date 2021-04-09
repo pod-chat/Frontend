@@ -7,12 +7,22 @@ const fetchEpisodes = (query) => {
         headers: {'X-ListenAPI-Key': 'cd746fdc5c714ca6989ec642497438d3'}
     };
 
-    axios(config)
+    return axios(config)
         .then(res => {
-            return res.data.results;
+            return (
+                {
+                    episodes: res.data.results,
+                    error: '',
+                }
+            )
         })
         .catch(err => {
-            return err.message;
+            return (
+                {
+                    episodes: [],
+                    error: err.message,
+                }
+            );
         })
 };
 

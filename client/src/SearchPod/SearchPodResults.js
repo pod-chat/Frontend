@@ -1,14 +1,19 @@
-import { connect } from 'react-redux';
+import {useContext} from 'react';
+import SearchContext from './searchContext';
 import PodResult from './PodResult'
 
-const SearchPodResults = (props) => {
+const SearchPodResults = () => {
+    const {loading, errors, results} = useContext(SearchContext);
+    const [isLoading, setIsLoading] = loading;
+    const [error, setError] = errors;
+    const [searchResults, setSearchResults] = results;
 
     return (
         <div>
-            {props.isLoading ? <h3>Searching...</h3> : null}
-            {props.error ? <p style={{ color: "red" }}>{props.error}</p> : null}
+            {isLoading ? <h3>Searching...</h3> : null}
+            {error ? <p style={{ color: "red" }}>{error}</p> : null}
             {
-                props.searchResults.map((pod) => (
+                searchResults.map((pod) => (
                     <PodResult key={pod.id} pod={pod}/>
                 ))
             }
@@ -16,13 +21,4 @@ const SearchPodResults = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-          // State from API
-          isLoading: state.isLoading,
-          error: state.error,
-          searchResults: state.searchResults
-    }
-  }
-
-export default connect(mapStateToProps, {})(SearchPodResults)
+export default SearchPodResults;

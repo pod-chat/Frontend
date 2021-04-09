@@ -1,24 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import { reducer } from './store'
-import logger from "redux-logger";
-import thunk from "redux-thunk";
-
-// TODO: remove redux store from this component
+import React, {useState, createContext} from 'react';
 
 //Import Components
 import View from './View'
 
-// STORE // 
-const store = createStore(reducer, applyMiddleware(thunk, logger));
+// CONTEXT 
+import SearchContext from './searchContext'
 
 export default function SearchPod() {
+    const [searchResults, setSearchResults] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+
     return (
-        <Provider store={store} >
+        <SearchContext.Provider value={{loading: [isLoading, setIsLoading], errors: [error, setError], results: [searchResults, setSearchResults]}} >
             <View />
-        </Provider>
+        </SearchContext.Provider>
     )
 }
 
