@@ -96,7 +96,7 @@ const PlaySpeed = styled.div`
 
 
 // COMPONENET //
-export default function View() {
+export default function View(props) {
     const audioRef = React.useRef(null);
     const progBarRef = React.useRef(null);
 
@@ -109,12 +109,17 @@ export default function View() {
 
     // EFFECTS // 
     useEffect(()=> {
-        getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
-            .then(data => {
-                setPod(data)
-            })
-            .catch(err => console.log(err))
-    },[])
+        console.log(props)
+        if (Object.keys(props).length === 0) {
+            getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
+                .then(data => {
+                    setPod(data)
+                })
+                .catch(err => console.log(err))
+        } else {
+            setPod(props)
+        }
+    },[props])
     
     // HELPLER FUNCTIONS //
     //Time: seconds -> H:mm:ss
