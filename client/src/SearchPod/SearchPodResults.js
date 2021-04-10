@@ -4,9 +4,9 @@ import PodResult from './PodResult'
 
 const SearchPodResults = () => {
     const {loading, errors, results} = useContext(SearchContext);
-    const [isLoading, setIsLoading] = loading;
-    const [error, setError] = errors;
-    const [searchResults, setSearchResults] = results;
+    const [isLoading, ] = loading;
+    const [error, ] = errors;
+    const [searchResults, ] = results;
 
     return (
         <div>

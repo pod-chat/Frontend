@@ -8,7 +8,7 @@ import SkipForward from './SkipForward'
 
 // STYLING // Styled Components
 const Container = styled.div`
-    height: 164px;
+    height: 100%;
     border-radius: 8px;
     background-color: #F6F6F6;
     margin-top: 10px;
@@ -96,7 +96,7 @@ const PlaySpeed = styled.div`
 
 
 // COMPONENET //
-export default function View() {
+export default function View({props}) {
     const audioRef = React.useRef(null);
     const progBarRef = React.useRef(null);
 
@@ -109,12 +109,16 @@ export default function View() {
 
     // EFFECTS // 
     useEffect(()=> {
-        getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
-            .then(data => {
-                setPod(data)
-            })
-            .catch(err => console.log(err))
-    },[])
+        if (!props || Object.keys(props).length === 0) {
+            getPodcastEpisode('d0becd4e21bc4349b21078236427b6d7') //TODO: hardcoded episode ID Needs changed
+                .then(data => {
+                    setPod(data)
+                })
+                .catch(err => console.log(err))
+        } else {
+            setPod(props)
+        }
+    },[props])
     
     // HELPLER FUNCTIONS //
     //Time: seconds -> H:mm:ss
@@ -163,9 +167,9 @@ export default function View() {
                 </div>
                 <PodTitleEpisodeDiv>
                     {
-                        pod.title ? 
-                        <><EpisodeTitle>{ pod.title }</EpisodeTitle>
-                        <PodcastTitle>{ pod.podcast.title }</PodcastTitle></> : <div>loading...</div>
+                        pod.title || pod.title_original ? 
+                        <><EpisodeTitle>{ pod.title || pod.title_original}</EpisodeTitle>
+                        <PodcastTitle>{ pod.podcast.title  || pod.podcast.title_original}</PodcastTitle></> : <div>loading...</div>
                     }
                 </PodTitleEpisodeDiv>
             </PodInfoDiv>
