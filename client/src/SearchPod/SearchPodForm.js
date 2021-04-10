@@ -1,8 +1,8 @@
 import styled from 'styled-components';
+import { useState, useContext } from 'react';
+import SearchContext from './searchContext';
+import fetchEpisodes from './fetchEpisodes';
 
-import { useState } from 'react';
-import { connect } from 'react-redux';
-import { fetchEpisodes } from './store'
 
 // STYLING //
 const SearchForm = styled.form`
@@ -43,8 +43,12 @@ const SearchButton = styled.button`
 `
 
 
-const SearchPodForm = (props) => {
-    const [searchValue, setSearchValue] = useState('')
+const SearchPodForm = () => {
+    const [searchValue, setSearchValue] = useState('');
+    const {loading, errors, results} = useContext(SearchContext);
+    const [, setIsLoading] = loading;
+    const [, setError] = errors;
+    const [, setSearchResults] = results;
 
     const onChange = evt => {
         setSearchValue(evt.target.value)
@@ -52,8 +56,16 @@ const SearchPodForm = (props) => {
 
     const onSubmit = evt => {
         evt.preventDefault();
+        setIsLoading(true);
         const searchUrlString = encodeURIComponent(searchValue.trim())
-        props.fetchEpisodes(searchUrlString);
+        fetchEpisodes(searchUrlString)
+            .then(res => {
+                setSearchResults(res.episodes)
+            })
+            .catch(err => {
+                setError(err.error)
+            })
+        setIsLoading(false);
     }
 
     return (
@@ -74,4 +86,4 @@ const SearchPodForm = (props) => {
     )
 }
 
-export default connect(null, { fetchEpisodes })(SearchPodForm)
+export default SearchPodForm;

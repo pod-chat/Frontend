@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation'
 import PostFeed from './PostFeed'
 import PostFull from './PostFull'
-import SearchPod from './components/SearchPod';
+import SearchPod from './SearchPod'
 
 //Styling Imports
 import './App.css';
@@ -15,7 +15,7 @@ function App() {
     <div className='App'> 
       <Navigation/> 
       <Switch>
-        <Route path ='/search'>
+        <Route exact path ='/search'>
             <SearchPod />
         </Route>
         <Route path='/post'>
