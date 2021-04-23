@@ -1,11 +1,8 @@
-import React from 'react'
+import React from "react";
 
 //Component Imports
-import View from './View'
+import View from "./View";
 
 export default function PostFeed() {
-    
-    return (
-        <View/>
-    )
+  return <View />;
 }
