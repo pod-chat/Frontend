@@ -10,6 +10,7 @@ import SearchPod from "./SearchPod";
 // Authentication
 import Login from "./Authentication/Login";
 import Signup from "./Authentication/Signup";
+import ForgotPassword from "./Authentication/ForgotPassword";
 
 //Styling Imports
 import "./App.css";
@@ -20,15 +21,25 @@ function App() {
       <Route path="/login">
         <Login />
       </Route>
-      <Navigation />
+      <Route path="/signup">
+        <Signup />
+      </Route>
+      <Route path="/forgot-password">
+        <ForgotPassword />
+      </Route>
+
       <Switch>
         <Route exact path="/search">
+          <Navigation />
           <SearchPod />
         </Route>
         <Route path="/post">
+          <Navigation />
           <PostFull />
+          <Navigation />
         </Route>
         <Route exact path="/">
+          <Navigation />
           <PostFeed />
         </Route>
       </Switch>
