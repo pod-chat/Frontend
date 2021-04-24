@@ -1,8 +1,7 @@
 import React from "react";
-import podChatLogo from "./podchatlogo.svg";
-import { Route, Link } from "react-router-dom";
-import SignUp from "../Signup";
-// import ForgotPassword from "../ForgotPassword";
+import podChatLogo from "../podchatlogo.svg";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -10,10 +9,13 @@ const Container = styled.div`
     color: #ffffff;
     background: linear-gradient(188.86deg, #f264ca 7.05%, #4a00e0 94.22%);
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   button {
-    position: absolute;
     width: 340px;
     height: 60px;
     left: 18px;
@@ -21,6 +23,13 @@ const Container = styled.div`
     background: #ffffff;
     border-radius: 59px;
     border: none;
+    margin-top: 40px;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+    color: #4a01e0;
   }
 
   input {
@@ -36,8 +45,15 @@ const Container = styled.div`
     color: white;
   }
 
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 339px;
+    height: 100px;
+  }
+
   img {
-    position: absolute;
     width: 220px;
     height: 44.48px;
     left: 78px;
@@ -45,29 +61,26 @@ const Container = styled.div`
   }
 
   h2 {
-    position: absolute;
     width: 340px;
     height: 44px;
     left: 18px;
     top: 312.6px;
 
-    font-family: Aktiv Grotesk;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 22px;
     text-align: center;
+    margin-top: 50px;
   }
 
-  /* form {
-    position: absolute;
-    width: 339px;
-    height: 0px;
-    left: 18px;
-    top: 459px;
-
-    border: 2px solid #ffffff;
-  } */
+  .signup-frgtpass {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 50px;
+    width: 220px;
+  }
 `;
 
 export default function View() {
@@ -80,20 +93,22 @@ export default function View() {
           podcast clips
         </h2>
         <form>
-          <input placeholder="EMAIL"></input>
-          <input placeholder="PASSWORD"></input>
-          <button>Log In</button>
+          <input placeholder="Email"></input>
+          <input placeholder="Password"></input>
         </form>
-        <Link to="/signup" style={{ textDecoration: "none", color: "white" }}>
-          Sign Up
-        </Link>
-        |
-        <Link
-          to="/forgot-password"
-          style={{ textDecoration: "none", color: "white" }}
-        >
-          Forgot Password?
-        </Link>
+        <button>Log In</button>
+        <div className="signup-frgtpass">
+          <Link to="/signup" style={{ textDecoration: "none", color: "white" }}>
+            Sign Up
+          </Link>
+          |
+          <Link
+            to="/forgot-password"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            Forgot Password?
+          </Link>
+        </div>
       </div>
     </Container>
   );
