@@ -1,6 +1,6 @@
 import React from "react";
 import podChatLogo from "../podchatlogo.svg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
@@ -81,6 +81,13 @@ const Container = styled.div`
     margin-top: 50px;
     width: 220px;
   }
+
+  span {
+    color: red;
+    font-size: 0.5rem;
+    text-align: left;
+    width: 75%;
+  }
 `;
 
 export default function View() {
@@ -93,8 +100,9 @@ export default function View() {
           podcast clips
         </h2>
         <form>
-          <input placeholder="Email"></input>
-          <input placeholder="Password"></input>
+          <input placeholder="Email Address" />
+
+          <input placeholder="Password" />
         </form>
         <button>Log In</button>
         <div className="signup-frgtpass">
