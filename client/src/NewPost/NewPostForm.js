@@ -14,6 +14,7 @@ export default function NewPostForm() {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const onSubmit = data => console.log(data);
 
+    //TODO: implement yup validation on inputs.
     return (
         <div>
             <div>Create a New Podcast Clip!</div>
