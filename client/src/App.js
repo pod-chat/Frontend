@@ -6,10 +6,11 @@ import Navigation from "./components/Navigation";
 import PostFeed from "./PostFeed";
 import PostFull from "./PostFull";
 import SearchPod from "./SearchPod";
+import NewPost from './NewPost';
 
 // Authentication
 import Login from "./Authentication/Login";
-import Signup from "./Authentication/Signup";
+import SignUp from "./Authentication/Signup";
 import ForgotPassword from "./Authentication/ForgotPassword";
 
 //Styling Imports
@@ -22,7 +23,7 @@ function App() {
         <Login />
       </Route>
       <Route path="/signup">
-        <Signup />
+        <SignUp />
       </Route>
       <Route path="/forgot-password">
         <ForgotPassword />
@@ -33,10 +34,13 @@ function App() {
           <Navigation />
           <SearchPod />
         </Route>
+        <Route exact path='/newpost'>
+          <Navigation />
+          <NewPost />
+        </Route>
         <Route path="/post">
           <Navigation />
           <PostFull />
-          <Navigation />
         </Route>
         <Route exact path="/">
           <Navigation />
