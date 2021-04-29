@@ -22,7 +22,7 @@ const Container = styled.div`
     border-top-style: hidden;
     border-right-style: hidden;
     border-left-style: hidden;
-    border-bottom-color: white;
+    border-bottom-color: #4E03E0;
   }
 
   input::placeholder {
