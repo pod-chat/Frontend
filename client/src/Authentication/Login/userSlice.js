@@ -1,4 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
+import axios from 'axios';
+
+// TODO Add loading  state
+// TODO Add  error state
 
 export const userSlice = createSlice({
     name: 'user',
@@ -31,4 +35,19 @@ export const userSlice = createSlice({
 });
 
 export const {initializeUser} = userSlice.actions;
+
+export const loginUser = (loginInfo) => {
+    return async (dispatch) => {
+        try{
+            const userInfo = await axios.post('https://podchatapi.herokuapp.com/api/auth/login', loginInfo);
+            localStorage.setItem('token', userInfo.data.token);
+            dispatch(initializeUser(userInfo.data.user));
+        } catch (err) {
+            console.error('err', err.response.data.message);
+        }
+    }
+};
+
+
+export const loggedInUser = state => state.user;
 export default userSlice.reducer;
