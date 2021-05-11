@@ -43,7 +43,7 @@ export const loginUser = (loginInfo) => {
             localStorage.setItem('token', userInfo.data.token);
             dispatch(initializeUser(userInfo.data.user));
         } catch (err) {
-            console.error('err', err.response.data.message);
+            console.log('err', err.response.data.message);
         }
     }
 };

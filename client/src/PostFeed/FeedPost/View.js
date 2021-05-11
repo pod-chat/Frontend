@@ -27,7 +27,7 @@ const RankTitleDiv = styled.div`
     margin-bottom: 10px;
 `
 
-export default function View() {
+export default function View(props) {
     return(
         <PostContainer>
             <RankTitleDiv>
