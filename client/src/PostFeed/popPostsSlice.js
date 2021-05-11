@@ -26,7 +26,7 @@ export const getPopPosts = () => {
             const posts = await axios.get('https://podchatapi.herokuapp.com/api/posts')
             const postsWithPodData = posts.data.map(post => {
                 const podData = getPodcastEpisode(posts.podcast_episode_id)
-                return {...post, podcast: podData.data}
+                return {...post, podcast: podData.data ? podData.data : null}
             })
             dispatch(addPopPost(postsWithPodData))
         }
@@ -35,21 +35,6 @@ export const getPopPosts = () => {
         }
     }
 };
-
-// export const getPodData = (posts) => {
-//     return async (dispatch) => {
-//         try {
-//             for (let i = 0; i < posts.length(); i++) {
-//                 const podData = await getPodcastEpisode(posts[i].podcast_episode_id)
-//                 dispatch(addPodData({index: i, podData: podData.data}))
-//             }
-//         }
-//         catch (err) {
-//             console.log("getPodData Error", err)
-//         }
-//     }
-// }
-
 
 export const popPosts = state => state.popPosts;
 export default popPostsSlice.reducer;
