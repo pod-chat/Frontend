@@ -24,9 +24,10 @@ export const getPopPosts = () => {
     return async (dispatch) => {
         try {
             const posts = await axios.get('https://podchatapi.herokuapp.com/api/posts')
+            console.log("posts", posts)
             const postsWithPodData = posts.data.map(post => {
-                const podData = getPodcastEpisode(posts.podcast_episode_id)
-                return {...post, podcast: podData.data ? podData.data : null}
+                const podData = getPodcastEpisode(post.podcast_episode_id)
+                return {...post, podcast: podData ? podData : null}
             })
             dispatch(addPopPost(postsWithPodData))
         }

@@ -16,6 +16,6 @@ export const getPodcastEpisode = (id) => { //Get podcast episode from ListenNote
             return(res.data);
         })
         .catch(err => {
-            console.log(err);
+            console.log("podcast fetch error: ", err);
         })
 }
