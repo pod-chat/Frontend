@@ -11,13 +11,8 @@ export default function PostFeed() {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        loadPosts()
-    }, []);
-
-    const loadPosts = () => {
         dispatch(getPopPosts())
-    }
-    console.log(posts) // fires after posts load
+    }, []);
     
     return (
         <View posts={posts}/>
