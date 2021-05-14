@@ -14,11 +14,15 @@ export const popPostsSlice = createSlice({
     reducers: {
         addPopPost: (state, action) => {
             state.popularPosts = (action.payload)
+        },
+        addPodDetails: (state, action) => {
+            const { postIndex, podcastData } = action.payload;
+            state.popularPosts[postIndex] = {...state.popularPosts[postIndex], podcast: podcastData}
         }
     }
 });
 
-export const { addPopPost } = popPostsSlice.actions;
+export const { addPopPost, addPodDetails } = popPostsSlice.actions;
 
 export const getPopPosts = () => {
     return async (dispatch) => {
