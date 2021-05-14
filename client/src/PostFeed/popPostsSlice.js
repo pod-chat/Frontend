@@ -13,7 +13,7 @@ export const popPostsSlice = createSlice({
     },
     reducers: {
         addPopPost: (state, action) => {
-            state.popularPosts = action.payload
+            state.popularPosts = (action.payload)
         }
     }
 });
@@ -24,12 +24,11 @@ export const getPopPosts = () => {
     return async (dispatch) => {
         try {
             const posts = await axios.get('https://podchatapi.herokuapp.com/api/posts')
-            console.log("posts", posts)
-            const postsWithPodData = posts.data.map(post => {
-                const podData = getPodcastEpisode(post.podcast_episode_id)
-                return {...post, podcast: podData ? podData : null}
-            })
-            dispatch(addPopPost(postsWithPodData))
+            // const postsWithPodData = posts.data.map(async (post) => {
+            //     const podData = await getPodcastEpisode(post.podcast_episode_id)
+            //     return {...post, podcast: podData ? podData : null}
+            // })
+            dispatch(addPopPost(posts.data))
         }
         catch(err) {
             console.log("getPopPosts Error", err)

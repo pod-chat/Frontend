@@ -11,7 +11,7 @@ export default function PostFeed() {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(getPopPosts());
+        dispatch(getPopPosts())
     }, []);
     
     return (
