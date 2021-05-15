@@ -13,8 +13,8 @@ const RankDiv = styled.div`
     background-color: darkgray;
 `
 
-export default function PostRank() {
-
+export default function PostRank({date}) {
+    
     return (
         <RankDiv>
             <div>100</div>

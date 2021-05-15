@@ -36,12 +36,12 @@ export default function View(props) {
     return(
         <PostContainer>
             <RankTitleDiv>
-                <PostRank />
+                <PostRank date={post.post_created_on}/>
                 <PostTitle title={post.post_title}/>
             </RankTitleDiv>
             <PostBody body={post.post_body}/>
             <PostAuthor displayName={post.user_display_name} handle={post.user_handle}/>
-            <PodcastTile podcast={post.podcast}/>
+            <PodcastTile props={post.podcast}/>
             <EngagementOptions/>
         </PostContainer>
     )
