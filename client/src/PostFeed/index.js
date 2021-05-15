@@ -7,11 +7,11 @@ import View from "./View";
 
 export default function PostFeed() {
     //TODO: if new posts selected, useSelector would pick newPosts (not created yet)
-    const posts = useSelector(popPosts);
+    const posts = useSelector(popPosts).popularPosts;
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(getPopPosts());
+        dispatch(getPopPosts())
     }, []);
     
     return (
