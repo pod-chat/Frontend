@@ -41,7 +41,7 @@ export default function View(props) {
             </RankTitleDiv>
             <PostBody body={post.post_body}/>
             <PostAuthor displayName={post.user_display_name} handle={post.user_handle}/>
-            <PodcastTile podcast={post.podcast}/>
+            <PodcastTile props={post.podcast}/>
             <EngagementOptions/>
         </PostContainer>
     )

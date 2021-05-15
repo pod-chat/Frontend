@@ -116,6 +116,7 @@ export default function View({props}) {
                 })
                 .catch(err => console.log(err))
         } else {
+            console.log("setting from props")
             setPod(props)
         }
     },[props])
