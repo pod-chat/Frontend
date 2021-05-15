@@ -6,11 +6,12 @@ const TitleDiv = styled.div`
     margin-left: 10px;
 `
 
-export default function PostTitle() {
+export default function PostTitle(props) {
+    const {title} = props;
 
     return (
         <TitleDiv>
-            I can't believe that Joe Rogan thinks that Connor McGreggor is the best...
+            {title}
         </TitleDiv>
     )
 }

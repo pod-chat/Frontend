@@ -1,8 +1,9 @@
 import React from 'react'
 import View from './View'
 
-export default function FeedPost() {
+export default function FeedPost(props) {
+
     return (
-        <View />
+        <View post={props.post}/>
     )
 }
