@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { popPosts } from './popPostsSlice';
 
+//TODO: better loading state for when feedposts are loading
+
 //Component Imports
 import FeedPost from './FeedPost'
 
@@ -21,7 +23,7 @@ export default function FeedContainer() {
             {
                 posts ? posts.map(post => {
                     return <FeedPost key={post.post_id} post={post}/>
-                }) : "Loading..."
+                }) : "Loading..." 
             }
         </Container>
     )

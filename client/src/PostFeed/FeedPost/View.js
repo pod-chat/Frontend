@@ -28,6 +28,8 @@ const RankTitleDiv = styled.div`
 `
 
 export default function View(props) {
+    const { post } = props;
+    console.log("post: ", post)
     return(
         <PostContainer>
             <RankTitleDiv>
