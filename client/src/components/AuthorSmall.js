@@ -26,12 +26,12 @@ const AuthorHandle = styled.div`
 `
 
 export default function PostAuthor(props) {
-
+    const {displayName, handle} = props;
     return (
         <AuthorDiv>
                 <AuthorImg src={props.user_img} />
-                <AuthorName>{props.user_name}</AuthorName>
-                <AuthorHandle>{props.user_handle}</AuthorHandle>
+                <AuthorName>{displayName}</AuthorName>
+                <AuthorHandle>{handle}</AuthorHandle>
         </AuthorDiv>
     )
 }

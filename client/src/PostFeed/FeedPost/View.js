@@ -34,11 +34,11 @@ export default function View(props) {
         <PostContainer>
             <RankTitleDiv>
                 <PostRank />
-                <PostTitle />
+                <PostTitle title={post.post_title}/>
             </RankTitleDiv>
-            <PostBody />
-            <PostAuthor />
-            <PodcastTile />
+            <PostBody body={post.post_body}/>
+            <PostAuthor displayName={post.user_display_name} handle={post.user_handle}/>
+            <PodcastTile podcast={post.podcast}/>
             <EngagementOptions/>
         </PostContainer>
     )
