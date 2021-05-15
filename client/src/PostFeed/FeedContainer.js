@@ -1,5 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { popPosts } from './popPostsSlice';
 
 //Component Imports
 import FeedPost from './FeedPost'
@@ -11,10 +13,16 @@ const Container = styled.div`
 `
 
 export default function FeedContainer() {
+    const posts = useSelector(popPosts).popularPosts;
+    console.log("posts from state: ", posts)
 
     return (
         <Container>
-             <FeedPost />
+            {
+                posts ? posts.map(post => {
+                    return <FeedPost key={post.post_id} post={post}/>
+                }) : "Loading..."
+            }
         </Container>
     )
 }
