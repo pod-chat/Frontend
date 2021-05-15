@@ -16,9 +16,12 @@ import EngagementOptions from '../../components/EngagementOptions'
 const PostContainer = styled.div`
     background-color: white;
     padding: 10px;
-    max-width: 375px;
+    max-width: 340px;
+    border-radius: 6px;
+    border-top: 8px solid #4E04E0;
     margin: 0 auto;
-    margin-bottom: 5px;
+    margin-bottom: 25px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `
 
 const RankTitleDiv = styled.div`
@@ -29,7 +32,7 @@ const RankTitleDiv = styled.div`
 
 export default function View(props) {
     const { post } = props;
-    console.log("post: ", post)
+
     return(
         <PostContainer>
             <RankTitleDiv>
