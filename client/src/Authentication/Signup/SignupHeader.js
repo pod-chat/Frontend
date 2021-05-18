@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   img {
-    width: 220px;
+    width: 100%;
     height: 44.48px;
     left: 78px;
     top: 247.31px;
@@ -28,8 +28,10 @@ const Container = styled.div`
 export default function SignupHeader() {
   return (
     <Container>
-      <img src={podChatLogo} alt="" />
-      <h2>Thank you for signing up with PodChat!</h2>
+      <div className="mainHeader">
+        <img src={podChatLogo} alt="" />
+        <h2>Thank you for signing up with PodChat!</h2>
+      </div>
     </Container>
   );
 }

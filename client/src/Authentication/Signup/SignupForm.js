@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { schema } from "./Schema";
 import axios from "axios";
 import styled from "styled-components";
+import loadingImg from "../loading-gif-png-5.gif";
 
 const Container = styled.div`
   form {
@@ -58,10 +59,15 @@ const Container = styled.div`
     width: 250px;
     /* margin-left: 10px; */
   }
+
+  .loader {
+    width: 30px;
+  }
 `;
 
 export default function SignUpForm() {
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -87,7 +93,8 @@ export default function SignUpForm() {
         setValue("user_handle", "");
         setValue("user_password", "");
         setValue("confirmPassword", "");
-        history.push("/");
+        setIsLoading(true);
+        history.push("/login");
       })
       .catch((err) => setErrorMessage(err.response.data.message));
   };
@@ -128,7 +135,14 @@ export default function SignUpForm() {
         <span>{errors.confirmPassword?.message}</span>
 
         <span>{errorMessage}</span>
-        <button type="submit">Sign Up</button>
+        <button type="submit">
+          {" "}
+          {isLoading ? (
+            <img className="loader" src={loadingImg} alt="" />
+          ) : (
+            "Sign Up"
+          )}{" "}
+        </button>
       </form>
     </Container>
   );
