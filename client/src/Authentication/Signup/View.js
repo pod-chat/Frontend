@@ -1,11 +1,11 @@
 import React from "react";
 import SignupForm from "./SignupForm";
 import SignupFooter from "./SignupFooter";
-import SignupHeader from "./";
+import SignupHeader from "./SignupHeader";
 import styled from "styled-components";
 
 const Container = styled.div`
-  div {
+  .mainView {
     color: #ffffff;
     background: linear-gradient(188.86deg, #f264ca 7.05%, #4a00e0 94.22%);
     height: 100vh;
@@ -16,12 +16,16 @@ const Container = styled.div`
   }
 `;
 
-export default function View() {
+function View() {
   return (
     <Container>
-      <SignupHeader />
-      <SignupForm />
-      <SignupFooter />
+      <div className="mainView">
+        <SignupHeader />
+        <SignupForm />
+        <SignupFooter />
+      </div>
     </Container>
   );
 }
+
+export default View;

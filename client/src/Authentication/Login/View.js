@@ -1,111 +1,112 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import podChatLogo from "../podchatlogo.svg";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import {loginUser, loggedInUser} from './userSlice';
-import {useDispatch, useSelector} from 'react-redux';
+import { loginUser, loggedInUser } from "./userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 // TODO import schema
 
-
 const Container = styled.div`
-div.loginView {
-  color: #ffffff;
-  background: linear-gradient(188.86deg, #f264ca 7.05%, #4a00e0 94.22%);
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+  div.loginView {
+    color: #ffffff;
+    background: linear-gradient(188.86deg, #f264ca 7.05%, #4a00e0 94.22%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-button {
-  width: 340px;
-  height: 60px;
-  left: 18px;
-  top: 584px;
-  background: #ffffff;
-  border-radius: 59px;
-  border: none;
-  margin-top: 40px;
-  
-  font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 21px;
-  color: #4a01e0;
-}
+  button {
+    width: 340px;
+    height: 60px;
+    left: 18px;
+    top: 584px;
+    background: #ffffff;
+    border-radius: 59px;
+    border: none;
+    margin-top: 30px;
 
-input {
-  color: #ffffff;
-  background-color: transparent;
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-color: white;
-}
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+    color: #4a01e0;
+  }
 
-input::placeholder {
-  color: white;
-}
+  input {
+    color: #ffffff;
+    background-color: transparent;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-color: white;
+  }
 
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 339px;
-  height: 100px;
-}
+  input::placeholder {
+    color: white;
+  }
 
-img {
-  width: 220px;
-  height: 44.48px;
-  left: 78px;
-  top: 247.31px;
-}
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 339px;
+    height: 200px;
+    margin-top: 15px;
+  }
 
-h2 {
-  width: 340px;
-  height: 44px;
-  left: 18px;
-  top: 312.6px;
-  
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-  text-align: center;
-  margin-top: 50px;
-}
+  img {
+    width: 220px;
+    height: 44.48px;
+    left: 78px;
+    top: 247.31px;
+  }
 
-.signup-frgtpass {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-top: 50px;
-  width: 220px;
-}
+  h2 {
+    width: 340px;
+    height: 44px;
+    left: 18px;
+    top: 312.6px;
 
-span {
-  color: red;
-  font-size: 0.5rem;
-  text-align: left;
-  width: 75%;
-}
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .signup-frgtpass {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 50px;
+    width: 220px;
+  }
+
+  span {
+    color: red;
+    font-size: 16px;
+    text-align: left;
+    width: 75%;
+  }
+
+  .loader {
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
-
 export default function View() {
-  const {
-    register,
-    handleSubmit,
-    formState ,
-    setValue,
-  } = useForm();
-
+  const { register, handleSubmit, formState, setValue } = useForm();
+  // const [error, setError] = useState(false);
   // TODO we want error state from userSlice
-  const user = useSelector(loggedInUser)
+  const user = useSelector(loggedInUser);
 
   const dispatch = useDispatch();
   let history = useHistory();
@@ -113,16 +114,16 @@ export default function View() {
   // TODO figure out how to history to the previous page
   useEffect(() => {
     if (user.user_id != null) {
-      history.push('/');
+      history.push("/");
     }
   }, [user]);
 
-  const submission = (whateverItDoesntReallyMatter) => {
-    console.log('long variable', whateverItDoesntReallyMatter);
-    dispatch(loginUser(whateverItDoesntReallyMatter));
+  const submission = (submit) => {
+    console.log("long variable", submit);
+    dispatch(loginUser(submit));
   };
-  
-  console.log('formState', formState)
+
+  console.log("formState", formState);
   return (
     <Container>
       <div className="loginView">
@@ -133,14 +134,11 @@ export default function View() {
         </h2>
         {/* -----add form state to loginUser parameter---- */}
         <form onSubmit={handleSubmit(submission)}>
-          <input 
-          placeholder="Email Address" 
-          {...register("user_email")} />
+          <input placeholder="Email Address" {...register("user_email")} />
 
-          <input 
-          placeholder="Password" 
-          {...register("user_password")}/>
-        <button>Log In</button>
+          <input placeholder="Password" {...register("user_password")} />
+          {/* {error ? <span className="loader">Loading...</span> : <span></span>} */}
+          <button>Log In</button>
         </form>
         <div className="signup-frgtpass">
           <Link to="/signup" style={{ textDecoration: "none", color: "white" }}>
