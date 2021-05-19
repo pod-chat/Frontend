@@ -6,7 +6,7 @@ import Navigation from "./components/Navigation";
 import PostFeed from "./PostFeed";
 import PostFull from "./PostFull";
 import SearchPod from "./SearchPod";
-import NewPost from './NewPost';
+import NewPost from "./NewPost";
 
 // Authentication
 import Login from "./Authentication/Login";
@@ -34,7 +34,7 @@ function App() {
           <Navigation />
           <SearchPod />
         </Route>
-        <Route exact path='/newpost'>
+        <Route exact path="/newpost">
           <Navigation />
           <NewPost />
         </Route>
