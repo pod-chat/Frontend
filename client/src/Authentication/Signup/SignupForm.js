@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { schema } from "./Schema";
+import { schema } from "./SignUpSchema";
 import axios from "axios";
 import styled from "styled-components";
 import loadingImg from "../loading-gif-png-5.gif";
@@ -85,6 +85,7 @@ export default function SignUpForm() {
       user_handle,
       user_password,
     };
+
     axios
       .post("https://podchatapi.herokuapp.com/api/auth/register", newUser)
       .then((res) => {
@@ -93,10 +94,10 @@ export default function SignUpForm() {
         setValue("user_handle", "");
         setValue("user_password", "");
         setValue("confirmPassword", "");
-        setIsLoading(true);
         history.push("/login");
       })
       .catch((err) => setErrorMessage(err.response.data.message));
+    setIsLoading(true);
   };
 
   return (
@@ -104,7 +105,7 @@ export default function SignUpForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
-          placeholder="Full Name"
+          placeholder="Display Name"
           {...register("user_display_name")}
         />
 
@@ -113,11 +114,7 @@ export default function SignUpForm() {
         <input type="text" placeholder="Email" {...register("user_email")} />
         <span>{errors.user_email?.message}</span>
 
-        <input
-          type="text"
-          placeholder="@Username"
-          {...register("user_handle")}
-        />
+        <input type="text" placeholder="@Handle" {...register("user_handle")} />
         <span>{errors.user_handle?.message}</span>
 
         <input

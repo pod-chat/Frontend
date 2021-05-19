@@ -13,7 +13,7 @@ export const userSlice = createSlice({
     user_handle: "",
     user_image: "",
     user_created_on: "",
-    isLoading: false,
+    error_message: "",
   },
   reducers: {
     initializeUser: (state, action) => {
@@ -24,7 +24,7 @@ export const userSlice = createSlice({
         user_handle,
         user_image,
         user_created_on,
-        isLoading,
+        error_message,
       } = action.payload;
 
       state.user_id = user_id;
@@ -33,7 +33,7 @@ export const userSlice = createSlice({
       state.user_handle = user_handle;
       state.user_image = user_image;
       state.user_created_on = user_created_on;
-      state.isLoading = isLoading;
+      state.error_message = error_message;
     },
   },
 });
@@ -47,10 +47,12 @@ export const loginUser = (loginInfo) => {
         "https://podchatapi.herokuapp.com/api/auth/login",
         loginInfo
       );
+
       localStorage.setItem("token", userInfo.data.token);
       dispatch(initializeUser(userInfo.data.user));
     } catch (err) {
       console.log("err", err.response.data.message);
+      // err.error_message = err.response.data.message;
     }
   };
 };
