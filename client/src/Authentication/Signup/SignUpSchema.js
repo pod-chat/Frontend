@@ -15,3 +15,4 @@ export const schema = yup.object().shape({
     .oneOf([yup.ref("user_password"), null], "Passwords must match")
     .trim(),
 });
+// TODO Change user_handle to require "@" at the beginning of the string not just include it
